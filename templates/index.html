@@ -1,23 +1,94 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section class="hero fade-in">
-    <h1>{{ profile.name }}</h1>
-    <h2>{{ profile.job }}</h2>
-    <p>{{ profile.intro }}</p>
-    <a href="{{ profile.github }}" class="btn">GitHub 보기</a>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag reveal">Available for work</div>
+    <h1 class="reveal reveal-delay-1">{{ profile.name }}<br><em>개발자</em></h1>
+    <p class="hero-job reveal reveal-delay-2">{{ profile.job }}</p>
+    <p class="hero-intro reveal reveal-delay-2">{{ profile.intro }}</p>
+    <div class="hero-actions reveal reveal-delay-3">
+      <a href="#projects" class="btn-primary">프로젝트 보기 →</a>
+      <a href="{{ profile.github }}" class="btn-ghost" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stat-item reveal">
+      <div class="stat-num" data-count="2" data-suffix="+">2+</div>
+      <div class="stat-label">완료 프로젝트</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-1">
+      <div class="stat-num" data-count="3" data-suffix="Y">3Y</div>
+      <div class="stat-label">개발 경력</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-2">
+      <div class="stat-num" data-count="100" data-suffix="%">100%</div>
+      <div class="stat-label">열정 지수</div>
+    </div>
+  </div>
 </section>
 
-<section class="projects">
-    <h2>프로젝트</h2>
-    <div class="grid">
-        {% for p in projects %}
-        <a href="/project/{{ p.id }}" class="card fade-in">
-            <h3>{{ p.title }}</h3>
-            <p>{{ p.desc }}</p>
-        </a>
-        {% endfor %}
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Selected Work</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid">
+    {% for p in projects %}
+    <a href="/project/{{ p.id }}" class="card reveal" style="transition-delay: {{ loop.index0 * 0.1 }}s">
+      <div class="card-index">{{ '%02d' % loop.index }}</div>
+      <h3>{{ p.title }}</h3>
+      <p>{{ p.desc }}</p>
+      <div class="card-arrow">→</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-text">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">About</h2>
     </div>
+    <p class="reveal">{{ profile.intro }}</p>
+    <p class="reveal">문제를 단순하게 정의하고, 사용자가 느끼는 마찰을 줄이는 것에서 개발의 즐거움을 찾습니다. 작은 디테일이 경험 전체를 바꾼다고 믿습니다.</p>
+  </div>
+
+  <div class="skills">
+    <div class="section-header reveal">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Skills</h2>
+    </div>
+    <div class="skills-list">
+      {% for skill in profile.skills %}
+      <div class="skill-row reveal">
+        <span class="skill-name">{{ skill.name }}</span>
+        <div class="skill-level">
+          {% for i in range(5) %}
+          <div class="skill-dot {% if i < skill.level %}on{% endif %}"></div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-header reveal" style="justify-content:center;">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Get in Touch</h2>
+  </div>
+  <p class="reveal" style="color:var(--text-dim);font-size:13px;letter-spacing:0.1em;">함께 만들고 싶은 것이 있다면</p>
+  <a href="mailto:{{ profile.email }}" class="contact-email reveal">{{ profile.email }}</a>
 </section>
 
 {% endblock %}
