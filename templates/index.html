@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="hero fade-in">
+    <h1>{{ profile.name }}</h1>
+    <h2>{{ profile.job }}</h2>
+    <p>{{ profile.intro }}</p>
+    <a href="{{ profile.github }}" class="btn">GitHub 보기</a>
+</section>
+
+<section class="projects">
+    <h2>프로젝트</h2>
+    <div class="grid">
+        {% for p in projects %}
+        <a href="/project/{{ p.id }}" class="card fade-in">
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.desc }}</p>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
