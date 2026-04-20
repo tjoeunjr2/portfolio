@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>홍길동 포트폴리오</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<nav class="nav">
+    <h1>Hong</h1>
+    <a href="{{ profile.github }}" target="_blank">GitHub</a>
+</nav>
+
+{% block content %}{% endblock %}
+
+<footer>
+    © 2026 홍길동 Portfolio
+</footer>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
