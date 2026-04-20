@@ -1,10 +1,13 @@
+import os
 from flask import Flask, render_template
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 app = Flask(
     __name__,
     template_folder=os.path.join(BASE_DIR, "templates"),
-    static_folder=os.path.join(BASE_DIR, "static")
+    static_folder=os.path.join(BASE_DIR, "static"),
+    static_url_path="/static"
 )
 
 projects = [
@@ -34,5 +37,5 @@ def home():
 
 @app.route("/project/<int:id>")
 def project(id):
-    project = next((p for p in projects if p["id"] == id), None)
-    return render_template("project.html", project=project)
+    proj = next((p for p in projects if p["id"] == id), None)
+    return render_template("project.html", project=proj)
